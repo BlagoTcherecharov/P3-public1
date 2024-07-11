@@ -1,39 +1,50 @@
 
-# name: test
-# on: push
-# jobs:
-#   my-job:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: appleboy/ssh-action@master
-#         with:
-#           host: ${{ secrets.HOST }}
-#           username: ${{ secrets.USERNAME }}
-#           key: ${{ secrets.KEY }}
-#           port: ${{ secrets.PORT }}
-#           source: "https://github.com/BlagoTcherecharov/P3-public1/blob/main/index.html"
-#           target: ./github
-#           # script: |
-#           #   ssh-keyscan github.com >> ~/.ssh/known_hosts
-#           #   scp -o UserKnownHostsFile=/github/home/.ssh/known_hosts git@github.com:BlagoTcherecharov/P3-public1/index.html ./github
+name: Copy files with SCP
 
-name: scp files
-on: push
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
-
-  build:
-    name: Build
+  copy:
     runs-on: ubuntu-latest
+    
     steps:
-    - name: copy file via ssh key
-      uses: appleboy/scp-action@v0.1.7
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Copy to Remote Server
+      uses: pierrickdelrieu/scp-action@v0.1.0
       with:
         host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        port: ${{ secrets.PORT }}
-        key: ${{ secrets.KEY }}
-        source: "https://github.com/BlagoTcherecharov/P3-public1/blob/main/index.html"
-        target: .
+        ssh_port: ${{ secrets.PORT }}
+        ssh_username: ${{ secrets.USERNAME }}
+        ssh_key: ${{ secrets.KEY }}
+        source_dir: ./index.html
+        destination_dir: ./github
+        rm: true
+
+
+
+# name: scp files
+# on: push
+# jobs:
+
+#   build:
+#     name: Build
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: copy file via ssh key
+#       uses: appleboy/scp-action@v0.1.7
+#       with:
+#         host: ${{ secrets.HOST }}
+#         username: ${{ secrets.USERNAME }}
+#         port: ${{ secrets.PORT }}
+#         key: ${{ secrets.KEY }}
+#         source: "https://github.com/BlagoTcherecharov/P3-public1/blob/main/index.html"
+#         target: .
 
 
 
