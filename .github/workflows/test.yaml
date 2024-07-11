@@ -12,6 +12,7 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
             scp -o UserKnownHostsFile=/github/home/.ssh/known_hosts git@github.com:BlagoTcherecharov/P3-public1/index.html ./github
 
 
