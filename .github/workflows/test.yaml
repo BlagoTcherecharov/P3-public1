@@ -1,20 +1,38 @@
-name: scp files
-on: push
-jobs:
+# name: scp files
+# on: push
+# jobs:
 
-  build:
-    name: Build
+#   build:
+#     name: Build
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: copy file via ssh key
+#       uses: appleboy/scp-action@v0.1.7
+#       with:
+#         host: ${{ secrets.HOST }}
+#         username: ${{ secrets.USERNAME }}
+#         port: ${{ secrets.PORT }}
+#         key: ${{ secrets.KEY }}
+#         source: "https://github.com/BlagoTcherecharov/P3-public1/blob/main/index.html"
+#         target: ./github
+
+
+name: scp files
+on: [push]
+jobs:
+  testing:
+    name: test scp action
     runs-on: ubuntu-latest
     steps:
-    - name: copy file via ssh key
-      uses: appleboy/scp-action@v0.1.7
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        port: ${{ secrets.PORT }}
-        key: ${{ secrets.KEY }}
-        source: "https://github.com/BlagoTcherecharov/P3-public1/blob/main/index.html"
-        target: ./github
-
-
-
+      - name: checkout
+        uses: actions/checkout@v4
+       
+      - name: copy file via ssh key
+        uses: ./
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          source: "https://github.com/BlagoTcherecharov/P3-public1/blob/main/index.html"
+          target: ./github
