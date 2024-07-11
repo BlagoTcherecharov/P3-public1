@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: copy file via ssh key
-      uses: appleboy/scp-action
+      uses: appleboy/scp-action@v0.1.7
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
