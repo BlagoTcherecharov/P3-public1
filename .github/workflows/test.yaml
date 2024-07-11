@@ -10,4 +10,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: cat ./github/index.html 
+          script: scp https://github.com/BlagoTcherecharov/P3-public1//index.html ./github
