@@ -17,22 +17,34 @@
 #         target: ./github
 
 
-name: scp files
-on: [push]
+name: Deploy to Remote Server
+
+on:
+  push:
+    branches:
+      - main  
+
 jobs:
-  testing:
-    name: test scp action
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout
-        uses: actions/checkout@v4
-       
-      - name: copy file via ssh key
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
-          source: "https://github.com/BlagoTcherecharov/P3-public1/blob/main/index.html"
-          target: ./github
+    - name: Checkout the repository
+      uses: actions/checkout@v2
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.KEY }}
+
+    - name: Deploy to Remote Server
+      env:
+        REMOTE_USER: ${{ secrets.USERNAME }}
+        REMOTE_HOST: ${{ secrets.HOST }}
+        #REMOTE_PATH: /var/www/html/nginxTest
+      run: |
+        ssh -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST << 'EOF'
+          cd ./github
+          git fetch --all
+          sudo git checkout origin/main -- index.html
+        EOF
