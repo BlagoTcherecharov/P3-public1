@@ -46,5 +46,5 @@ jobs:
         ssh -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST << 'EOF'
           cd ./github
           git fetch --all
-          sudo git checkout origin/main -- index.html
+          sudo git pull origin main
         EOF
