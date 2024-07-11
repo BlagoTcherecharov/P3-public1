@@ -1,50 +1,20 @@
-
-name: Copy files with SCP
-
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
+name: scp files
+on: push
 jobs:
-  copy:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
 
-    - name: Copy to Remote Server
-      uses: pierrickdelrieu/scp-action@v0.1.0
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: copy file via ssh key
+      uses: appleboy/scp-action@v0.1.7
       with:
         host: ${{ secrets.HOST }}
-        ssh_port: ${{ secrets.PORT }}
-        ssh_username: ${{ secrets.USERNAME }}
-        ssh_key: ${{ secrets.KEY }}
-        source_dir: ./index.html
-        destination_dir: ./github
-        rm: true
-
-
-
-# name: scp files
-# on: push
-# jobs:
-
-#   build:
-#     name: Build
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: copy file via ssh key
-#       uses: appleboy/scp-action@v0.1.7
-#       with:
-#         host: ${{ secrets.HOST }}
-#         username: ${{ secrets.USERNAME }}
-#         port: ${{ secrets.PORT }}
-#         key: ${{ secrets.KEY }}
-#         source: "https://github.com/BlagoTcherecharov/P3-public1/blob/main/index.html"
-#         target: .
+        username: ${{ secrets.USERNAME }}
+        port: ${{ secrets.PORT }}
+        key: ${{ secrets.KEY }}
+        source: "https://github.com/BlagoTcherecharov/P3-public1/blob/main/index.html"
+        target: ./github
 
 
 
