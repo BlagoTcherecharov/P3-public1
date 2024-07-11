@@ -1,36 +1,35 @@
 
-# name: test
-# on: push
-# jobs:
-#   my-job:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: appleboy/ssh-action@master
-#         with:
-#           host: ${{ secrets.HOST }}
-#           username: ${{ secrets.USERNAME }}
-#           key: ${{ secrets.KEY }}
-#           port: ${{ secrets.PORT }}
-#           script: |
-#             ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-#             scp git@github.com:BlagoTcherecharov/P3-public1/index.html ./github
-# #git@github.com:BlagoTcherecharov/P3-public1.git
-
-name: Deploy to production
-
+name: test
 on: push
-
 jobs:
-  deploy:
-    name: SCP files to server
+  my-job:
     runs-on: ubuntu-latest
     steps:
-      - name: SCP files via ssh key
-        uses: appleboy/ssh-action@master
-        env:
-          USERNAME: ${{ secrets.USERNAME }}
-          HOST: ${{ secrets.HOST }}
-          KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - uses: appleboy/ssh-action@master
         with:
-          script: scp -r ./P3-public1/index.html USERNAME@HOST:./github
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            scp -o UserKnownHostsFile=/github/home/.ssh/known_hosts git@github.com:BlagoTcherecharov/P3-public1/index.html ./github
+
+
+# name: Deploy to production
+
+# on: push
+
+# jobs:
+#   deploy:
+#     name: SCP files to server
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: SCP files via ssh key
+#         uses: appleboy/ssh-action@master
+#         env:
+#           USERNAME: ${{ secrets.USERNAME }}
+#           HOST: ${{ secrets.HOST }}
+#           KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#         with:
+#           script: scp -r ./P3-public1/index.html USERNAME@HOST:./github
 
