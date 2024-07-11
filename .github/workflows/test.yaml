@@ -31,7 +31,7 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
+        key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         source: "https://github.com/BlagoTcherecharov/P3-public1/blob/main/index.html"
         target: ./github
