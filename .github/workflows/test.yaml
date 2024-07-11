@@ -33,7 +33,7 @@ jobs:
         port: ${{ secrets.PORT }}
         key: ${{ secrets.KEY }}
         source: "https://github.com/BlagoTcherecharov/P3-public1/blob/main/index.html"
-        target: ./github
+        target: .
 
 
 
