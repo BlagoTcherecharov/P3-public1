@@ -10,8 +10,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: ls -a
-      #- name: my-step
-       # run: |
-        #  chmod +x ./index.html
-         # cat ./index.html
+          script: cat ./github/index.html 
