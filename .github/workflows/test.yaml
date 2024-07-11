@@ -10,5 +10,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: scp git@github.com:BlagoTcherecharov/P3-public1/index.html ./github
+          script: |
+            ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+            scp git@github.com:BlagoTcherecharov/P3-public1/index.html ./github
 #git@github.com:BlagoTcherecharov/P3-public1.git
