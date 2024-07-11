@@ -11,7 +11,7 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: whoami
-      - name: my-step
-        run: |
-          chmod +x ./index.html
-          cat ./index.html
+      #- name: my-step
+       # run: |
+        #  chmod +x ./index.html
+         # cat ./index.html
