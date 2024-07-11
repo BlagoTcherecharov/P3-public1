@@ -35,21 +35,5 @@ jobs:
         source: "https://github.com/BlagoTcherecharov/P3-public1/blob/main/index.html"
         target: ./github
 
-# name: Deploy to production
 
-# on: push
-
-# jobs:
-#   deploy:
-#     name: SCP files to server
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: SCP files via ssh key
-#         uses: appleboy/ssh-action@master
-#         env:
-#           USERNAME: ${{ secrets.USERNAME }}
-#           HOST: ${{ secrets.HOST }}
-#           KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-#         with:
-#           script: scp -r ./P3-public1/index.html USERNAME@HOST:./github
 
